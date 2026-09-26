@@ -46,11 +46,13 @@ internal class Camera2Backend(
                 ?: intArrayOf()
 
         val outputFormats =
-            platformFormats
-                .mapNotNull { platformFormat ->
-                    platformFormat.toProjectPixelFormat()
+            buildSet {
+                platformFormats.forEach { platformFormat ->
+                    platformFormat
+                        .toProjectPixelFormat()
+                        ?.let(::add)
                 }
-                .toSet()
+            }
 
         val outputSizes =
             buildMap<PixelFormat, List<IntSize>> {
