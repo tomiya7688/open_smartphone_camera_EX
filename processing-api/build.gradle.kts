@@ -9,4 +9,5 @@ kotlin {
 
 dependencies {
     api(project(":capture-api"))
+    testImplementation(kotlin("test"))
 }
