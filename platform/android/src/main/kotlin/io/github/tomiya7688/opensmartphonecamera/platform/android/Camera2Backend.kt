@@ -43,11 +43,13 @@ internal class Camera2Backend(
         val platformFormats =
             streamConfigurationMap
                 ?.outputFormats
-                .orEmpty()
+                ?: intArrayOf()
 
         val outputFormats =
             platformFormats
-                .mapNotNull(Int::toProjectPixelFormat)
+                .mapNotNull { platformFormat ->
+                    platformFormat.toProjectPixelFormat()
+                }
                 .toSet()
 
         val outputSizes =
